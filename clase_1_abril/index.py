@@ -12,12 +12,15 @@ def CompuFunc(x,n):
     return f_x
 
 # %%
-def ploting(x,f_x,leg):
+def ploting(x,f_x,leg,save):
     with plt.style.context('Solarize_Light2'):
         plt.plot(x,f_x,label = leg)
         plt.grid()
         plt.title('Funciones')
         plt.legend()
+        if save == True:
+            name = input('Nombre de la figura: ')
+            plt.savefig(name)
     
 # %%
 f_x = []
@@ -35,5 +38,5 @@ plt.plot(x,fir_F)
 # %%
 leg = ['First function','Second function']
 for i in range(len(f_x)):
-    ploting(x,f_x[i],leg[i])
+    ploting(x,f_x[i],leg[i],True)
 # %%
