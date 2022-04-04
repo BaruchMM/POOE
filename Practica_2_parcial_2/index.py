@@ -8,17 +8,45 @@ fileName = 'text.txt'
 
 # %%
 text = open(path + fileName, encoding="utf8") 
-print(text)
 # %%
 hist = {'the':0, 'and':0, 'it':0, 'in':0, 'on':0}
 # %%
 for i in text:
-    for letra in i:
-        letra = letra.lower()
-        if letra in hist.keys():
-            hist[letra] += 1 
+  palabras = i.strip()
+  for palabra in palabras.split():
+    if palabra in hist.keys(): hist[palabra] += 1
+
 
 # %%
 plt.bar(x=hist.keys(), height=hist.values(), width=1, edgecolor="black")
+
+# %%
+text = open(path + fileName, encoding="utf8") 
+vocales = {'a':0, 'e':0, 'i':0, 'o':0,'u':0}
+for i in text:
+    for letra in i:
+        letra = letra.lower()
+        if letra in vocales.keys():
+            vocales[letra] += 1 
+print(vocales)
+tot_voc = 0
+for i in vocales.values(): 
+  tot_voc += i
+print('Total de vocales: ' +str(tot_voc))
+
+# %%
+text = open(path + fileName, encoding="utf8") 
+frases = 0
+for parrafo in text:
+  frases += len(parrafo.split('.'))
+print('Total de frases: ' +str(frases))
+# %%
+text = open(path + fileName, encoding="utf8") 
+mayus = 0
+for parrafo in text:
+  for letra in parrafo:
+    if letra.isupper() == True:
+      mayus += 1
+print('Total de mayusculas: ' +str(mayus))
 
 # %%
