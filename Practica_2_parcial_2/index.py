@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 # %% 
 path = '/home/baruch/Documentos/GitHub/POOE/Practica_2_parcial_2/'
 fileName = 'text.txt'
-
+texto = read.archivos(path,fileName)
 # %%
-text = open(path + fileName, encoding="utf8") 
+text = texto.readText()
 # %%
 hist = {'the':0, 'and':0, 'it':0, 'in':0, 'on':0}
 # %%
@@ -21,7 +21,7 @@ for i in text:
 plt.bar(x=hist.keys(), height=hist.values(), width=1, edgecolor="black")
 
 # %%
-text = open(path + fileName, encoding="utf8") 
+text = texto.readText()
 vocales = {'a':0, 'e':0, 'i':0, 'o':0,'u':0}
 for i in text:
     for letra in i:
@@ -35,13 +35,13 @@ for i in vocales.values():
 print('Total de vocales: ' +str(tot_voc))
 
 # %%
-text = open(path + fileName, encoding="utf8") 
+text = texto.readText()
 frases = 0
 for parrafo in text:
   frases += len(parrafo.split('.'))
 print('Total de frases: ' +str(frases))
 # %%
-text = open(path + fileName, encoding="utf8") 
+text = texto.readText()
 mayus = 0
 for parrafo in text:
   for letra in parrafo:
