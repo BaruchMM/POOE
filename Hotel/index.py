@@ -1,0 +1,2 @@
+import hotel as h
+
