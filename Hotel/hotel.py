@@ -5,6 +5,7 @@ Created on Wed Mar 30 22:04:06 2022
 @author: Irazu
 """
 # %%
+from asyncio.windows_events import NULL
 import habitacionHotel as h
 import random
 
@@ -26,13 +27,27 @@ def crearHabitacionSpec(nombre, camas, servInc, servAd):
     habitacion = h.HabitacionHotel(numero, nombre, camas, servInc, servAd)
     return habitacion
 
+def Ocupadas():
+    data = []
+    with open("habitaciones.txt") as file:
+            for line in file:
+                line = line.strip()
+                line = line.split(',')
+                #.split(',')
+                #.split(' ')
+                data.append(line)
+    return data
+
 def inicializarHabitacionesSpec():
-    specs = [["Uriel", 2, ["caja seguridad"], []],
+    specs = [["", 2, ["caja seguridad"], []],
             ["", 2, ["caja seguridad", "especiales"], []],
             ["", 2, [], []],
             ["", 1, ["caja seguridad"], []],
             ["", 1, ["caja seguridad"], []],
             ["", 1, ["caja seguridad"], []]]
+    ocupa = Ocupadas()
+    for i in range(6):
+        specs[i][0]=ocupa[i][0]
     habitaciones = {}
     for i in range(len(specs)):
         hab = crearHabitacionSpec(specs[i][0],specs[i][1],specs[i][2],specs[i][3])
@@ -71,33 +86,27 @@ def mostrarDisponibles(habitaciones):
         if(habitaciones[i].getEstatus() == False):
             disponibles[i] = habitaciones[i]
     mostrarHabitaciones(disponibles)
-
-def reporteFinalDia():
-    print("Guardar Reporte")
-
-def main():
-    
-    habitaciones = {}
-    habitaciones = inicializarHabitacionesSpec()
-    # print("\nHABITACIONES: ")
-    # mostrarHabitaciones(habitaciones)
-    
-    # print("\nDISPONIBLES: ")
-    # mostrarDisponibles(habitaciones)
-    
-    # liberarHabitacion(habitaciones, list(habitaciones.keys())[1])
-    # print("\nHABITACIONES: ")
-    # mostrarHabitaciones(habitaciones)
-
-    reservar_habitacion(habitaciones)
-    
+   
 def habitacion_dispo(habitaciones, ncamas, cap_diferentes):
+    reservado = False
     if cap_diferentes == 1:
         for c in habitaciones.keys():
             if(habitaciones[c].getCamas()==ncamas) and ('especiales' in habitaciones[c].getSerIncl()):
                 if(habitaciones[c].getEstatus()==False):
-                    nombre = input('Ingrese su nombre por favor')
+                    print('Habitación '+str(c) +' disponible')
+                    nombre = input('Ingrese su nombre por favor: ')
                     habitaciones[c].ocuparHabitacion(nombre)
+                    reservado = True
+                    print('Habitación '+str(c) +' reservada exitosamente :D')
+                else: print('No hay habitaciones con servicios para capacidades diferentes dispible :c')
+    else:
+        for c in habitaciones.keys():
+            if(habitaciones[c].getEstatus()==False):
+                nombre = input('Ingrese su nombre por favor: ')
+                habitaciones[c].ocuparHabitacion(nombre)
+                reservado = True
+                print('Habitación '+str(c) +' reservada exitosamente :D')
+                break
 def reservar_habitacion(habitaciones):
     ncamas = 3
     while(ncamas > 2):
@@ -109,7 +118,6 @@ def reservar_habitacion(habitaciones):
     habitacion = habitacion_dispo(habitaciones, ncamas, cap_diferentes)
 
 # %%
-main()
-
 
 # %%
+#mostrarHabitaciones(habitaciones)
