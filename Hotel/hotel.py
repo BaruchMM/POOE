@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Mar 30 22:04:06 2022
-
-@author: Irazu
-"""
 # %%
 from asyncio.windows_events import NULL
+import fileinput
 import habitacionHotel as h
 import random
 
@@ -29,7 +24,7 @@ def crearHabitacionSpec(nombre, camas, servInc, servAd):
 
 def Ocupadas():
     data = []
-    with open("habitaciones.txt") as file:
+    with open("C:/Users/baruc/OneDrive - Universidad de Guanajuato/Documentos/Tareas UG/POOE/Hotel/cuartos.txt") as file:
             for line in file:
                 line = line.strip()
                 line = line.split(',')
@@ -47,7 +42,7 @@ def inicializarHabitacionesSpec():
             ["", 1, ["caja seguridad"], []]]
     ocupa = Ocupadas()
     for i in range(6):
-        specs[i][0]=ocupa[i][0]
+        specs[i][0]=ocupa[i][1]
     habitaciones = {}
     for i in range(len(specs)):
         hab = crearHabitacionSpec(specs[i][0],specs[i][1],specs[i][2],specs[i][3])
@@ -56,11 +51,11 @@ def inicializarHabitacionesSpec():
         
 def mostrarHabitaciones(habitaciones):
     for n in habitaciones.keys():
-        print(n, habitaciones[n].cliente,habitaciones[n].serviciosAdicionales)
+        print(n, habitaciones[n].cliente,habitaciones[n].getSerIncl(),habitaciones[n].serviciosAdicionales)
 
 def mostrarHabitacionesDisponibles(habitaciones):
     for n in habitaciones.keys():
-        print(n, habitaciones[n].cliente,habitaciones[n].serviciosAdicionales)
+        print(n, habitaciones[n].cliente,habitaciones[n].getSerIncl(),habitaciones[n].serviciosAdicionales)
 
 def reservarHabitacion(habitaciones, numero, cliente):
     if(numero in habitaciones.keys()):
@@ -73,7 +68,13 @@ def reservarHabitacion(habitaciones, numero, cliente):
     
 def liberarHabitacion(habitaciones, numero):
     if(numero in habitaciones.keys()):
+        i = list(habitaciones.keys()).index(numero)
+        print(str(i+1)+','+str(habitaciones[numero].cliente))
         if(habitaciones[numero].dejarHabitacion()):
+            
+            with fileinput.FileInput("C:/Users/baruc/OneDrive - Universidad de Guanajuato/Documentos/Tareas UG/POOE/Hotel/cuartos.txt", inplace=True, backup='.txt') as file:
+                for line in file:
+                    print(line.replace(str(i+1)+','+str(habitaciones[numero].cliente)+'\n',str(i+1)+',\n'), end='')
             print("La habitacion " + numero + " fue liberada exitosamente.")
         else:
             print("La habitacion " + numero + " ya está desocupada.")
@@ -101,12 +102,13 @@ def habitacion_dispo(habitaciones, ncamas, cap_diferentes):
                 else: print('No hay habitaciones con servicios para capacidades diferentes dispible :c')
     else:
         for c in habitaciones.keys():
-            if(habitaciones[c].getEstatus()==False):
-                nombre = input('Ingrese su nombre por favor: ')
-                habitaciones[c].ocuparHabitacion(nombre)
-                reservado = True
-                print('Habitación '+str(c) +' reservada exitosamente :D')
-                break
+            if(habitaciones[c].getCamas()==ncamas):
+                if(habitaciones[c].getEstatus()==False):
+                    nombre = input('Ingrese su nombre por favor: ')
+                    habitaciones[c].ocuparHabitacion(nombre)
+                    reservado = True
+                    print('Habitación '+str(c) +' reservada exitosamente :D')
+                    break
 def reservar_habitacion(habitaciones):
     ncamas = 3
     while(ncamas > 2):
@@ -117,6 +119,16 @@ def reservar_habitacion(habitaciones):
         cap_diferentes = int(input('Requiere servicio para capacidades especiales? ingrese 1 para sí, 2 para no: '))
     habitacion = habitacion_dispo(habitaciones, ncamas, cap_diferentes)
 
+def soliServAdicional(habitaciones,numero):
+    servicio = input('Ingrese el servicio que desea: ')
+    if(numero in habitaciones.keys()):
+        i = list(habitaciones.keys()).index(numero)
+        if(habitaciones[numero].solicitarServicioAdicional(servicio)):
+            print('Se agregó el servicio '+servicio+' exitosamente.')
+        else:
+            print('No se pudo agregar el servicio '+servicio+'.')
+    else:
+        print("El número de habitación proporcionado no es válido.")
 # %%
 
 # %%

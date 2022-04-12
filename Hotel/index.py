@@ -3,6 +3,7 @@ import hotel as ho
 
 habitaciones = {}
 habitaciones = ho.inicializarHabitacionesSpec()
+
 # %%
 ## Menu ##
 fin = False
@@ -21,8 +22,11 @@ while fin != True:
             if inp == '1': ho.mostrarHabitaciones(habitaciones)
             elif inp == '2': ho.reservar_habitacion(habitaciones)
             elif inp == '3': 
-                numero = int(input('Ingrese el número de habitación'))
+                numero = str(input('Ingrese el número de habitación: '))
                 ho.liberarHabitacion(habitaciones, numero)
+            else:
+                numero = str(input('Ingrese el número de habitación: '))
+                ho.soliServAdicional(habitaciones,numero)
         elif inp.lower() == 'exit':
             i = 0
             fin = True

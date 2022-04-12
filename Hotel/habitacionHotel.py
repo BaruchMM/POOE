@@ -5,7 +5,7 @@
 
 class HabitacionHotel:
     __estatus = False
-    
+
     def __init__(self, numero, cliente, camas, serviciosIncluidos, serviciosAdicionales):
         self.__numero = numero
         self.cliente = cliente
