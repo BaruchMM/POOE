@@ -1,10 +1,10 @@
-from sqlalchemy import null
+#from sqlalchemy import null
 import pandas as pd
 import star as ST
 
 def readData():
     data = []
-    path = 'C:/Users/baruc/OneDrive - Universidad de Guanajuato/Documentos/Tareas UG/POOE/Stars_Clasification/'
+    path = ''
     with open(path + 'data.txt', 'r') as dataShop:
         for line in dataShop:
             line = line.strip()
@@ -20,7 +20,7 @@ def Stars():
     data = readData()
     stars = {}
     for i in range(1,len(data)):
-        star = null
+        #star = null
         star = getStars(data[i][0],data[i][1],data[i][2],ST.star.typeStar(float(data[i][1]),float(data[i][2])))
         stars[i] = star
     return stars
@@ -28,7 +28,6 @@ def Stars():
 def seeStars(stars):
     print('ID     \t UV Magnitude:\t \t Blue Magnitude: \t Absolute Mag: \t\t Type:')
     for n in stars.keys():
-        
         print(str(n)+'\t|\t'+str(stars[n].UVMag)+'\t\t|\t'+str(stars[n].blueMag)+'\t\t|\t'+str(stars[n].AbsMag)+'\t\t|\t'+str(stars[n].typeStar))
 
 def groupStars(stars):
@@ -65,7 +64,7 @@ def groupStars(stars):
     print(groups)
     return groups
 
-def biuldDataFrame(stars,groups):
+def buildDataFrame(stars):
     magnitudes = []
     starstypes = []
     for n in stars.keys():
@@ -74,5 +73,6 @@ def biuldDataFrame(stars,groups):
     df = pd.DataFrame(magnitudes,starstypes)
     print(df)
     return df
+
 def Hertzsprung_Russell_Diagram():
     print('s')
