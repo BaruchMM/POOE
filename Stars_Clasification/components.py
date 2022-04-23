@@ -1,5 +1,6 @@
-#from sqlalchemy import null
+import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 import star as ST
 
 def readData():
@@ -64,15 +65,20 @@ def groupStars(stars):
     print(groups)
     return groups
 
-def buildDataFrame(stars):
+# def buildDataFrame(stars):
+#     magnitudes = []
+#     starstypes = []
+#     for n in stars.keys():
+#         magnitudes.append(stars[n].AbsMag)
+#         starstypes.append(stars[n].typeStar)
+#     df = pd.DataFrame(magnitudes,starstypes)
+#     print(df)
+#     return df
+
+def Hertzsprung_Russell_Diagram(stars):
     magnitudes = []
     starstypes = []
     for n in stars.keys():
         magnitudes.append(stars[n].AbsMag)
         starstypes.append(stars[n].typeStar)
-    df = pd.DataFrame(magnitudes,starstypes)
-    print(df)
-    return df
-
-def Hertzsprung_Russell_Diagram():
-    print('s')
+    plt.plot(np.arange(1,15),magnitudes)

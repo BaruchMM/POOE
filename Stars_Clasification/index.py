@@ -3,7 +3,7 @@ import components as co
 
 stars = {}
 stars = co.Stars()
-co.buildDataFrame(stars)
+co.Hertzsprung_Russell_Diagram(stars)
 ## Menu ##
 fin = False
 while fin != False:
