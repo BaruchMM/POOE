@@ -3,11 +3,9 @@ import components as co
 
 stars = {}
 stars = co.Stars()
-
+co.biuldDataFrame(stars)
 ## Menu ##
 fin = False
-ss = stars[1]
-co.seeStars(stars)
 while fin != False:
     print('Bienvenido, utilice uno de los números para seleccionar la opción deseada:')
     print('\t 1-Mostrar habitaciones')
@@ -21,13 +19,12 @@ while fin != False:
         if inp in ['1','2','3','4']:
             i = 0
             if inp == '1': co.seeStars(stars)
-            elif inp == '2': ho.reservar_habitacion(habitaciones)
+            elif inp == '2': print('s')
             elif inp == '3': 
-                numero = str(input('Ingrese el número de habitación: '))
-                ho.liberarHabitacion(habitaciones, numero)
+                print('s')
             else:
-                numero = str(input('Ingrese el número de habitación: '))
-                ho.soliServAdicional(habitaciones,numero)
+                
+                print('s')
         elif inp.lower() == 'exit':
             i = 0
             fin = True
