@@ -25,5 +25,7 @@ def Stars():
     return stars
 
 def seeStars(stars):
+    print('ID     \t UV Magnitude:\t \t Blue Magnitude: \t Absolute Mag: \t\t Type:')
     for n in stars.keys():
-        print(n, stars[n].UVMag,stars[n].blueMag,stars[n].AbsMag,stars[n].typeStar)
+        
+        print(str(n)+'\t|\t'+str(stars[n].UVMag)+'\t\t|\t'+str(stars[n].blueMag)+'\t\t|\t'+str(stars[n].AbsMag)+'\t\t|\t'+str(stars[n].typeStar))
