@@ -2,10 +2,9 @@
 import pandas as pd
 import star as ST
 
-def readData():
+def readData(path = 'data.txt'):
     data = []
-    path = ''
-    with open(path + 'data.txt', 'r') as dataShop:
+    with open(path, 'r') as dataShop:
         for line in dataShop:
             line = line.strip()
             line = line.split()
