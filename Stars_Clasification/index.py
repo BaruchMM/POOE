@@ -1,10 +1,6 @@
 import star
 import components as co
 
-#stars = {}
-#stars = co.Stars()
-#co.buildDataFrame(stars)
-
 # MENÚ DE INGRESO DE DATOS
 def menu_datos():
     datos = {}
@@ -34,7 +30,6 @@ def menu_datos():
                     else:
                         co.seeStars(datos)
                 else:
-                    print('OPCION 4 SELECCIONADA')
                     menu_proc(datos)
             elif inp.lower() == 'exit':
                 fin_input = True
@@ -64,7 +59,7 @@ def ag_datos_manual(datos):
         
         fin_preg = False
         while(not fin_preg):
-            opcion = input("¿Q2uiere ingresar más datos?(1 SÍ, 2 NO): ")
+            opcion = input("¿Quiere ingresar más datos?(1 SÍ, 2 NO): ")
             if(opcion in ["1","2"]):
                 if(opcion == "2"):
                     fin = True
@@ -73,6 +68,7 @@ def ag_datos_manual(datos):
                 print("Opción no válida.")
     return datos
 
+# AGREGAR ESTRELLA A DICCIONARIO DE ESTRELLAS
 def appendDict(dict, data):
     for i in range(len(data)):
         dict[len(dict)+1] = co.getStars(data[i][0],data[i][1],data[i][2],star.star.typeStar(float(data[i][1]),float(data[i][2])))
@@ -86,29 +82,28 @@ def menu_proc(datos):
         print('MENÚ PROCESAMIENTO DE DATOS')
         print('Utilice algún número para seleccionar una opción.')
         print('Para salir de este menú ingrese "EXIT".')
-        print('\t 1. Mostrar habitaciones')
-        print('\t 2. Reservar habitación')
-        print('\t 3. Dejar habitación')
-        print('\t 4. Solicitar servicio adicional')
-        print('\t 0. Regresar a menú de ingreso de datos')
+        print('\t 1. Diagrama de Hertzsprung-Russell')
+        print('\t 2. Histograma de frecuencias')
+        print('\t 3. Mostrar datos actuales')
         fin_input = False
         while(fin_input == False):
             inp = input('Seleccione la opción deseada: ')
             print("")
-            if inp in ['1','2','3','4']:
+            if inp in ['1','2','3']:
                 fin_input = True
                 if inp == '1':
-                    print('OPCION 1 SELECCIONADA')
+                    co.Hertzsprung_Russell_Diagram(datos)
                 elif inp == '2':
-                    print('OPCION 2 SELECCIONADA')
-                elif inp == '3':
-                    print('OPCION 3 SELECCIONADA')
+                    co.freqPlot(datos)
                 else:
-                    print('OPCION 4 SELECCIONADA')
+                    if(datos == []):
+                        print("Actualmente no hay datos agregados.")
+                    else:
+                        co.seeStars(datos)
             elif inp.lower() == 'exit':
                 fin_input = True
                 fin = True
-                print("Cerrando.")
+                print("Saliendo del menú de procesamiento de datos.")
             else:
                 print("Opción no válida.")
 
