@@ -61,7 +61,7 @@ def groupStars(stars):
             groups['M5'] += 1
         else:
             groups['M8'] += 1
-    print(groups)
+    #print(groups)
     return groups
 
 def numType(stars):
@@ -96,13 +96,14 @@ def numType(stars):
             dataTyoe.append(13)
         else:
             dataTyoe.append(14)
-    print(dataTyoe)
+    #print(dataTyoe)
     return dataTyoe
 
 def take_third(elem):
     return elem[2]
 
 def Hertzsprung_Russell_Diagram(stars):
+    plt.clf()
     data = []
     numtype = numType(stars)
     i = 0
@@ -112,25 +113,30 @@ def Hertzsprung_Russell_Diagram(stars):
     data = sorted(data, key=take_third)
     x = []
     y = []
-    print(data[0][0])
+    #print(data[0][0])
     for j in range(len(data)):
         x.append(data[j][0])
         y.append(float(data[j][1]))
     
-    print(data[1][0])
+    #print(data[1][0])
     with plt.style.context('Solarize_Light2'):
         plt.scatter(x,y, 100)
         plt.ylim(max(y)+2,min(y)-2)
         plt.xlabel('Star type')
         plt.ylabel('Absolute Magnitude')
         plt.title('Hertzsprung-Russell Diagram of Data')
+        plt.savefig("Hertzsprung-Russell.png")
+    print("Diagrama de Hertzsprung-Russell guardado en la carpeta de ejecución.")
 
 def freqPlot(stars):
+    Hertzsprung_Russell_Diagram(stars)
     frec = groupStars(stars)
     with plt.style.context('Solarize_Light2'):
         plt.bar(frec.keys(),frec.values(),0.95)
         plt.xlabel('Star type')
         plt.ylabel('Frequency')
         plt.title('Frequency of star types')
+        plt.savefig("Histograma.png")
+    print("Histograma guardado en la carpeta de ejecución.")
 
         
