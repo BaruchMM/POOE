@@ -5,9 +5,9 @@ class persona():
         self.edad = edad
         self.nacimiento = nacimiento
     
-    def info(self):
-        print("\nNombre: ", self.nombre,"\nSexo: ", self.sexo,"\nEdad: ", self.edad,
-        "\nLugar de nacimiento: ", self.nacimiento)
+    def conslulta(self):
+        print('\n\nNombre: ', self.nombre, '  |  ','Sexo: ', self.sexo, '  |  ', 'Edad: ', self.edad,
+        '  |  ',  'Lugar de nacimiento: ', self.nacimiento)
 
 
 class destreza():
@@ -15,45 +15,52 @@ class destreza():
         self.mejorMateria = mejorMateria
         self.peorMateria = peorMateria
     
-    def info(self):
-        print('\nla mejor materia es: ', self.mejor_materia,'\nLa peor materia es: ', self.peor_materia)
+    def conslulta(self):
+        print('la mejor materia es: ', self.mejorMateria,'  |  ','La peor materia es: ', self.peorMateria)
 
 class alumno(persona, destreza):
-    def __init__(self, carrera, semestre, promedio, NUA ):
+    def __init__(self, nombre, sexo, edad, nacimiento, mejorMateria, peorMateria,carrera, semestre, promedio, NUA ):
+        #Invocamos los atrivutos de las clases persona y destreza para heredarlos a alumno
+        persona.__init__(self, nombre, sexo, edad, nacimiento)
+        destreza.__init__(self,mejorMateria, peorMateria)
+        # Añadimos los atributos característicos del alumno
         self.carrera = carrera
         self.semestre = semestre
         self.promedio = promedio
         self.NUA = NUA
     
-    def info(self):
-        persona.info(self)
-        destreza.info(self)
-        print('\nNUA: ', self.NUA,'  |  ','\nSemestre: ', self.semestre,'  |  ',
-            '\nPromedio: ', self.promedio,'  |  ','\nCarrera: ', self.carrera)
+    def conslulta(self):
+        persona.conslulta(self)
+        destreza.conslulta(self)
+        print('NUA: ', self.NUA,'  |  ','Semestre: ', self.semestre,'  |  ', 'Promedio: ', 
+        self.promedio,'  |  ','Carrera: ', self.carrera)
 
 class profesor(persona, destreza):
-    def __init__(self, NUE, antiguedad, horasLab, grado = "DESCONOCIDO", *args, **kwargs):
+    def __init__(self, nombre, sexo, edad, nacimiento, mejorMateria, peorMateria, NUE, antiguedad, laboradas, grado):
+        #Invocamos los atrivutos de las clases persona y destreza para heredarlos a profesor
+        persona.__init__(self, nombre, sexo, edad, nacimiento)
+        destreza.__init__(self,mejorMateria, peorMateria)
+        # Añadimos los atributos característicos del profesor
         self.NUE = NUE
         self.antiguedad = antiguedad
-        self.horasLab = horasLab
+        self.laboradas = laboradas
         self.grado = grado
-        super(profesor, self).__init__(*args, **kwargs)
     
-    def info(self):
-        persona.info(self)
-        destreza.info(self)
-        print(
-            "\nNUE: ", self.NUE,
-            "\nAntigüedad: ", self.antiguedad,
-            "\nHoras laboradas: ", self.horasLab,
-            "\nGrado: ", self.grado
-        )
+    def conslulta(self):
+        persona.conslulta(self)
+        destreza.conslulta(self)
+        print('NUE: ', self.NUE,'  |  ','Antigüedad: ', self.antiguedad,'  |  ','Horas laboradas: ', 
+        self.laboradas,'  |  ','Grado: ', self.grado)
 
+############ Inicializamos el programa ###########
 
-alumno1 = alumno(427086, 8, 9.01, "Licenciatura en Física", "Uriel Chávez Flores", "Masculino", 21, "Aguascalientes, Aguascalientes", "POOyE", "Cosmología")
+# modelo:  VarAlumno = alumno(nombre, sexo, edad, nacimiento, mejorMateria, peorMateria,carrera, semestre, promedio, NUA)
+VarAlumno = alumno("Juan El Sahili Martinez", "Masculino", 22, "Penjamo, Gto",
+ "POOyE", "Cosmología", 'Licenciatura en Física', 8, 9.01,427086)
+# Obtenemos la información del alumno:
+VarAlumno.conslulta()
 
-alumno1.info()
-
-profesor1 = profesor(301580, 4, 15, "Maestría", "Eric Ruiz Flores", "Masculino", 24, "Aguascalientes, Aguascalientes", "Sistemas Lineales", "POOyE")
-
-profesor1.info()
+# modelo:  VarProfesor = profesor(nombre, sexo, edad, nacimiento, mejorMateria, peorMateria, NUE, antiguedad, laboradas, grado)
+VarProfesor = profesor('Liset Karime Mejía Hernandez' , 'Femenino', 29, 'Leon, Gto.', 'Metodos matemáticos', 'POOE', '902010', '1 año', 3200, 'Doctorado')
+# Obtenemos la información del profesor:
+VarProfesor.conslulta()
