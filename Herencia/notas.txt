@@ -1,0 +1,4 @@
+cambiar datos de txt a csv
+agregar que se lean los datos
+guardat todos los datos en diccionarios 
+agregar a profesores atributos de trabajo
