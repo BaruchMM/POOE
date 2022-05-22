@@ -1,2 +1,3 @@
 
 Uriel	M	22	aguascalientes	cosmologia	artes	fisica	8	5	789546
+Baruch Mejia	M	22	penjamo	relatividad general	funciones especiales	fisica	8	9	902010
