@@ -4,58 +4,84 @@ import getpass
 
 class Aplication():
     def __init__(self):
-        self.raiz = Tk()
-        self.raiz.geometry("370x400")
-        # Se establece que no se pueda modificar el tamaño de la ventana
-        self.raiz.resizable(0,0)
-        self.raiz.title("Calculadora")
-        # cambia el formato de la fuente actual a negrita
-        self.fuente = font.Font(weight='bold')
-        # Se definen las etiquetas  que irán con el textbox y se le aplica la fuente importada
-        self.etiq1 = ttk.Label(self.raiz, text="numero 1:", font=self.fuente)
-        self.etiq2 = ttk.Label(self.raiz, text="numero 2:", font=self.fuente)
-        self.show = ""
-        self.mensaje = StringVar()
-        self.display = Label(self.raiz, textvariable = self.mensaje,)
-        self.etiq3 = ttk.Label(self.raiz, textvariable=self.mensaje, font=self.fuente, foreground='blue')
-        self.mensaje.set("0") # texto inicial no display
-        self.display.grid(columnspan = 4) #expandir o display em 4 espaços no grid
+        self.app = Tk()
+        self.app.geometry("370x400")
+        self.app.config(bg='gray')
+        self.app.title("Calculadora Python")
+
+        self.show = ""  #variavel que vai mudar o texto
+
+        self.equation = StringVar() #variavel que vai mostrar o texto
+
+        self.d = Frame()
+        self.d.config(bg='white')
+        self.d.pack()
+        self.d.config(width=350, height=50)
+        self.display = Frame()
+        self.display.config(bg='white')
+        # self.display.pack()
+        self.display.config(width=350, height=50)
+        self.display.place(x=175,y=20)
+        self.res = Label(self.display, textvariable = self.equation,bg='white') # label para o display do texto
+        self.equation.set("0") # texto inicial no display
+        
+        self.res.grid(columnspan = 4) #expandir o display em 4 espaços no grid
 
 
-        # Se declaran dos variables de tipo numerico
-        self.numero1 = IntVar()
-        self.numero2 = IntVar()
+        # botoes numericos
+        self.panel = Frame()
+        self.panel.config(bg='white')
+        self.one = Button(self.panel, text = "1", height = 6, width = 7,command = lambda:self.presionarBoton(1), bg = "#5F9EA0")
+        self.one.grid(row = 1, column = 0)
 
-        # Se declaran dos texbox
-        self.txt_numero1 = ttk.Entry(
-        self.raiz, textvariable=self.numero1, width=30)
-        self.txt_numero2 = ttk.Entry(
-        self.raiz, textvariable=self.numero2, width=30)
-        self.separ1 = ttk.Separator(self.raiz, orient=HORIZONTAL)
+        self.two = Button(self.panel, text = "2", height = 6, width = 7,command = lambda:self.presionarBoton(2), bg = "#5F9EA0")
+        self.two.grid(row = 1, column = 1)
 
-        # Se declaran los botones
-        self.boton1 = ttk.Button(self.raiz, text="Sumar", command=self.sumar)
-        self.boton2 = ttk.Button(self.raiz, text="Cancelar", command=quit)
-        self.boton3 = ttk.Button(self.raiz, text="Restar", command=self.restar)
-        self.boton4 = ttk.Button(self.raiz, text="Multiplicar", command=self.multiplicar)
-        self.boton5 = ttk.Button(self.raiz, text="Dividir", command=self.dividir)
+        self.three = Button(self.panel, text = "3", height = 6, width = 7,command = lambda:self.presionarBoton(3), bg = "#5F9EA0")
+        self.three.grid(row = 1, column = 2)
+
+        self.four = Button(self.panel, text = "4", height = 6, width = 7,command = lambda:self.presionarBoton(4), bg = "#5F9EA0")
+        self.four.grid(row = 2, column = 0)
+
+        self.five = Button(self.panel, text = "5", height = 6, width = 7,command = lambda:self.presionarBoton(5), bg = "#5F9EA0")
+        self.five.grid(row= 2, column = 1)
+
+        self.six = Button(self.panel, text = "6", height = 6, width = 7,command = lambda:self.presionarBoton(6), bg = "#5F9EA0")
+        self.six.grid(row = 2, column = 2)
+
+        self.seven = Button(self.panel, text="7", height = 6, width = 7,command = lambda:self.presionarBoton(7), bg = "#5F9EA0")
+        self.seven.grid(row = 3, column = 0)
+
+        self.eight = Button(self.panel, text="8",height = 6, width = 7,command = lambda:self.presionarBoton(8), bg = "#5F9EA0")
+        self.eight.grid(row = 3, column = 1)
+
+        self.nine = Button(self.panel, text="9", height = 6, width = 7,command = lambda:self.presionarBoton(9), bg = "#5F9EA0")
+        self.nine.grid(row = 3, column = 2)
+
+        self.zero = Button(self.panel, text = "0", height = 6, width = 7,command = lambda:self.presionarBoton(0), bg = "#5F9EA0")
+        self.zero.grid(row = 4, column = 1)
+
+        self.botonSum = Button(self.panel, text="+",height = 6, width = 7, command=self.sumar)
+        self.botonSum.grid(row = 3, column = 3)
+        self.botonCancel = Button(self.panel, text="AC",height = 6, width = 7, command=quit)
+        self.botonCancel.grid(row = 0, column = 4)
+        self.botonRetar = Button(self.panel, text="-",height = 6, width = 7, command=self.restar)
+        self.botonRetar.grid(row = 3, column = 4)
+        self.botonMulti = Button(self.panel, text="x",height = 6, width = 7, command=self.multiplicar)
+        self.botonMulti.grid(row = 2, column = 3)
+        self.botonDividir = Button(self.panel, text="÷",height = 6, width = 7, command=self.dividir)
+        self.botonDividir.grid(row = 0, column = 4)
+        self.panel.pack()
+        
 
         # Se definen las posiciones de los txt, separador, label y botones
-        self.etiq1.place(x=30, y=40)
-        self.etiq2.place(x=30, y=80)
-        self.etiq3.place(x=200, y=120)
-        self.txt_numero1.place(x=150, y=42)
-        self.txt_numero2.place(x=150, y=82)
-        self.separ1.place(x=5, y=170, bordermode=OUTSIDE,height=10, width=420)
-        self.boton1.place(x=310, y=110)
-        self.boton2.place(x=310, y=140)
-        self.boton3.place(x=220, y=110)
-        self.boton4.place(x=130, y=110)
-        self.boton5.place(x=40, y=110)
-        self.txt_numero1.focus_set()
-        self.raiz.mainloop()
+        # self.etiq1.place(x=30, y=40)
+        # self.etiq2.place(x=30, y=80)
+        # self.etiq3.place(x=200, y=120)
+        self.app.mainloop()
     # Se definen los metodos para las distintas funciones de aritmetica
-
+    def presionarBoton(self,numero):
+        print(numero)
     def sumar(self):
         resultado = self.numero1.get() + self.numero2.get()
         # se utiliza este metodo para limpiar los txt y el focus para que volver a ingresar un numero
