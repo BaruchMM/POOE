@@ -66,7 +66,7 @@ class Aplication():
         self.botonSum.grid(row = 3, column = 3)
         self.botonCancel = Button(self.panel, text="AC",height = 4, width = 7, command=quit, bg = "red")
         self.botonCancel.grid(row = 1, column = 4)
-        self.botonDel = Button(self.panel, text="Del",height = 4, width = 7, command=quit, bg = "red")
+        self.botonDel = Button(self.panel, text="Del",height = 4, width = 7, command=self.delete, bg = "red")
         self.botonDel.grid(row = 1, column = 3)
         self.botonRetar = Button(self.panel, text="-",height = 4, width = 7, command=self.restar)
         self.botonRetar.grid(row = 3, column = 4)
@@ -101,7 +101,9 @@ class Aplication():
         # self.etiq3.place(x=200, y=120)
         self.app.mainloop()
     # Se definen los metodos para las distintas funciones de aritmetica
- 
+    def delete(self):
+        self.result.pop(-1)
+        print(self.result)
     def presionarBoton(self,num):  
         if self.result == '0':
             if num == ".":
