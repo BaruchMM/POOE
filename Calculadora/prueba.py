@@ -30,4 +30,5 @@ equation.set("0") # texto inicial no display
 res.grid(columnspan = 4) #expandir o display em 4 espaços no grid
 
 asdfasfsdagtasergfasdfERWEFsdf
+print('holis')
 app.mainloop()
