@@ -25,46 +25,46 @@ class Aplication():
         self.res = Label(self.display, textvariable = self.equation,bg='white') # label para o display do texto
         self.result = str(0)
         self.equation.set(self.result) # texto inicial no display
-        
+        self.ans = ''
         self.res.grid(columnspan = 4) #expandir o display em 4 espaços no grid
         self.numeros = []
 
         # botoes numericos
         self.panel = Frame()
         self.panel.config(bg='white')
-        self.one = Button(self.panel, text = "1", height = 4, width = 7,command = lambda:self.presionarBoton(1), bg = "#5F9EA0")
+        self.one = Button(self.panel, text = "1", height = 4, width = 7,command = lambda:self.presionarBoton(1), bg = "gray")
         self.one.grid(row = 1, column = 0)
 
-        self.two = Button(self.panel, text = "2", height = 4, width = 7,command = lambda:self.presionarBoton(2), bg = "#5F9EA0")
+        self.two = Button(self.panel, text = "2", height = 4, width = 7,command = lambda:self.presionarBoton(2), bg = "gray")
         self.two.grid(row = 1, column = 1)
 
-        self.three = Button(self.panel, text = "3", height = 4, width = 7,command = lambda:self.presionarBoton(3), bg = "#5F9EA0")
+        self.three = Button(self.panel, text = "3", height = 4, width = 7,command = lambda:self.presionarBoton(3), bg = "gray")
         self.three.grid(row = 1, column = 2)
 
-        self.four = Button(self.panel, text = "4", height = 4, width = 7,command = lambda:self.presionarBoton(4), bg = "#5F9EA0")
+        self.four = Button(self.panel, text = "4", height = 4, width = 7,command = lambda:self.presionarBoton(4), bg = "gray")
         self.four.grid(row = 2, column = 0)
 
-        self.five = Button(self.panel, text = "5", height = 4, width = 7,command = lambda:self.presionarBoton(5), bg = "#5F9EA0")
+        self.five = Button(self.panel, text = "5", height = 4, width = 7,command = lambda:self.presionarBoton(5), bg = "gray")
         self.five.grid(row= 2, column = 1)
 
-        self.six = Button(self.panel, text = "6", height = 4, width = 7,command = lambda:self.presionarBoton(6), bg = "#5F9EA0")
+        self.six = Button(self.panel, text = "6", height = 4, width = 7,command = lambda:self.presionarBoton(6), bg = "gray")
         self.six.grid(row = 2, column = 2)
 
-        self.seven = Button(self.panel, text="7", height = 4, width = 7,command = lambda:self.presionarBoton(7), bg = "#5F9EA0")
+        self.seven = Button(self.panel, text="7", height = 4, width = 7,command = lambda:self.presionarBoton(7), bg = "gray")
         self.seven.grid(row = 3, column = 0)
 
-        self.eight = Button(self.panel, text="8",height = 4, width = 7,command = lambda:self.presionarBoton(8), bg = "#5F9EA0")
+        self.eight = Button(self.panel, text="8",height = 4, width = 7,command = lambda:self.presionarBoton(8), bg = "gray")
         self.eight.grid(row = 3, column = 1)
 
-        self.nine = Button(self.panel, text="9", height = 4, width = 7,command = lambda:self.presionarBoton(9), bg = "#5F9EA0")
+        self.nine = Button(self.panel, text="9", height = 4, width = 7,command = lambda:self.presionarBoton(9), bg = "gray")
         self.nine.grid(row = 3, column = 2)
 
-        self.zero = Button(self.panel, text = "0", height = 4, width = 7,command = lambda:self.presionarBoton(0), bg = "#5F9EA0")
+        self.zero = Button(self.panel, text = "0", height = 4, width = 7,command = lambda:self.presionarBoton(0), bg = "gray")
         self.zero.grid(row = 4, column = 0)
 
         self.botonSum = Button(self.panel, text="+",height = 4, width = 7, command=self.sumar)
         self.botonSum.grid(row = 3, column = 3)
-        self.botonCancel = Button(self.panel, text="AC",height = 4, width = 7, command=quit, bg = "red")
+        self.botonCancel = Button(self.panel, text="AC",height = 4, width = 7, command=self.restart, bg = "red")
         self.botonCancel.grid(row = 1, column = 4)
         self.botonDel = Button(self.panel, text="Del",height = 4, width = 7, command=self.delete, bg = "red")
         self.botonDel.grid(row = 1, column = 3)
@@ -80,18 +80,8 @@ class Aplication():
         self.botonEqual.grid(row = 4, column = 4)
         self.botonExp = Button(self.panel, text="10^x",height = 4, width = 7, command=self.dividir)
         self.botonExp.grid(row = 4, column = 2)
-        self.botonDot = Button(self.panel, text=".",height = 4, width = 7, command=self.dividir)
+        self.botonDot = Button(self.panel, text=".",height = 4, width = 7,command = lambda:self.presionarBoton('.'))
         self.botonDot.grid(row = 4, column = 1)
-        self.botonRaiz = Button(self.panel, text="√",height = 4, width = 7, command=self.restar)
-        self.botonRaiz.grid(row = 0, column = 0)
-        self.botonCos = Button(self.panel, text="Cos",height = 4, width = 7, command=self.restar)
-        self.botonCos.grid(row = 0, column = 1)
-        self.botonSin = Button(self.panel, text="Sin",height = 4, width = 7, command=self.restar)
-        self.botonSin.grid(row = 0, column = 2)
-        self.botonRPar = Button(self.panel, text=")",height = 4, width = 7, command=self.restar)
-        self.botonRPar.grid(row = 0, column = 4)
-        self.botonLPar = Button(self.panel, text="(",height = 4, width = 7, command=self.restar)
-        self.botonLPar.grid(row = 0, column = 3)
         self.panel.pack()
         
 
@@ -101,9 +91,22 @@ class Aplication():
         # self.etiq3.place(x=200, y=120)
         self.app.mainloop()
     # Se definen los metodos para las distintas funciones de aritmetica
+    def restart(self):
+        self.result = '0'
+        self.equation.set(self.result)
+
     def delete(self):
-        self.result.pop(-1)
-        print(self.result)
+        if len(self.result) <= 1:
+            self.result = '0'
+            self.equation.set(self.result)
+        elif self.result[-1] == ' ':
+            self.result = self.result[:-1]
+            self.result = self.result[:-1]
+            self.equation.set(self.result)
+        else:
+            self.result = self.result[:-1]
+            self.equation.set(self.result)
+
     def presionarBoton(self,num):  
         if self.result == '0':
             if num == ".":
@@ -112,6 +115,7 @@ class Aplication():
                 self.result = ""
         self.result = self.result + str(num)
         self.equation.set(self.result)
+
     def sumar(self):
        self.result = self.result +' '+ '+' +' '
        self.equation.set(self.result)
@@ -132,19 +136,12 @@ class Aplication():
     def calcular(self):
         self.result += ' ñ'
         self.result = self.result.split(" ")
-        multiplicar = []
-        multiplicarPos = []
-        dividir = []
-        dividirPos = []
-        restar = []
-        restarPos = []
-        sumar = []
-        sumarPos = []
         final = False
         i = 0
         while final != True:
             print(self.result)
             if self.result[i] == 'ñ':
+                self.result.pop(i)
                 final = True
             else:
                 if self.result[i] == 'x':
@@ -178,7 +175,6 @@ class Aplication():
 
 def main():
     mi_app = Aplication()
-    return 0
 
 if __name__ == '__main__':
     main()
