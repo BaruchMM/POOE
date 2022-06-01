@@ -84,13 +84,7 @@ class Aplication():
         self.botonDot.grid(row = 4, column = 1)
         self.panel.pack()
         
-
-        # Se definen las posiciones de los txt, separador, label y botones
-        # self.etiq1.place(x=30, y=40)
-        # self.etiq2.place(x=30, y=80)
-        # self.etiq3.place(x=200, y=120)
         self.app.mainloop()
-    # Se definen los metodos para las distintas funciones de aritmetica
     def restart(self):
         self.result = '0'
         self.equation.set(self.result)
